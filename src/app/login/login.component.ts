@@ -1,0 +1,133 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
+
+
+import { AuthenticationService } from '../authentication.service';
+import { User } from './user_interface';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+  registrationForm: FormGroup;
+  loginForm: FormGroup;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.registrationForm = this.formBuilder.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.minLength(5)]
+      
+    });
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(5)]]
+    });
+  }
+
+  get firstNameControl(): FormControl {
+    return this.registrationForm.get('firstName') as FormControl;
+  }
+  
+  get lastNameControl(): FormControl {
+    return this.registrationForm.get('lastName') as FormControl;
+  }
+
+  get usernameControl(): FormControl {
+    return this.registrationForm.get('username') as FormControl;
+  }
+
+  get passwordControl(): FormControl {
+    return this.registrationForm.get('password') as FormControl;
+  }
+
+  
+
+  utenti: string = 'utenti';
+  personale: User[] = [];
+  nuovoUtente: User = { utenti: '', firstName: '', lastName: '', username: '', password: ''  };
+
+
+  // ...
+  
+  addUser() {
+    this.nuovoUtente.firstName = this.registrationForm.get('firstName')!.value;
+    this.nuovoUtente.lastName = this.registrationForm.get('lastName')!.value;
+    this.nuovoUtente.username = this.registrationForm.get('username')!.value;
+    this.nuovoUtente.password = this.registrationForm.get('password')!.value;
+  
+    const utenteDaAggiungere: User = { ...this.nuovoUtente };
+  
+    const personale: User[] = JSON.parse(localStorage.getItem(this.utenti) || '[]');
+    for (const utente of personale) {
+      if (utente.username === this.nuovoUtente.username) {
+        console.log('Utente già registrato');
+        return;
+      }
+    }
+  
+    const encryptedUsername = CryptoJS.AES.encrypt(utenteDaAggiungere.username, 'secretKey').toString();
+    const encryptedPassword = CryptoJS.AES.encrypt(utenteDaAggiungere.password, 'secretKey').toString();
+  
+    utenteDaAggiungere.username = encryptedUsername;
+    utenteDaAggiungere.password = encryptedPassword;
+  
+    personale.push(utenteDaAggiungere);
+    localStorage.setItem(this.utenti, JSON.stringify(personale));
+    this.router.navigate(['login']);
+  }
+  
+  
+  
+  login(): void {
+    const username = this.loginForm.get('username')!.value;
+    const password = this.loginForm.get('password')!.value;
+  
+    const personale: User[] = JSON.parse(localStorage.getItem(this.utenti) || '[]');
+    const utenteRegistrato = personale.find((utente) => {
+      const decryptedUsername = CryptoJS.AES.decrypt(utente.username, 'secretKey').toString(CryptoJS.enc.Utf8);
+      return decryptedUsername === username;
+    });
+  
+    if (utenteRegistrato) {
+      const decryptedPassword = CryptoJS.AES.decrypt(utenteRegistrato.password, 'secretKey').toString(CryptoJS.enc.Utf8);
+  
+      if (decryptedPassword === password) {
+        const decryptedFirstName = CryptoJS.AES.decrypt(utenteRegistrato.firstName, 'secretKey').toString(CryptoJS.enc.Utf8);
+        localStorage.setItem('firstName', decryptedFirstName);
+  
+        // Esegui la chiamata al servizio di autenticazione per verificare le credenziali
+        this.authenticationService.login(username!, password).subscribe(() => {
+          this.router.navigate(['automobili']);
+        });
+      } else {
+        this.router.navigate(['login']);
+      }
+    } else {
+      this.router.navigate(['login']);
+    }
+  }
+  
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['home']);
+  }
+
+    getPersonale() {
+    return localStorage.getItem(this.utenti);
+  }
+
+  ngOnInit(): void {
+    this.personale = JSON.parse(this.getPersonale() || '[]');
+  }
+}

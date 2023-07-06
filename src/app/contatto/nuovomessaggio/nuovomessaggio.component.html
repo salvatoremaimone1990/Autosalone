@@ -1,0 +1,89 @@
+<audio src="../../assets/audio.mp3" controls><!--autoplay--></audio>
+<div class="contengo" 
+     style="margin: 0 auto;">
+ 
+     <div style="text-align: center">
+      <div class="container" 
+     style="font-weight: bold; ; text-align: center;">
+  <div [hidden]="submitted">
+    <h1>Inserisci il tuo messaggio</h1>
+    <form (ngSubmit)="onSubmit()" #messaggiForm="ngForm">
+      <div class="form-group">
+        <label for="nome">Inserisci il tuo nome</label><br>
+        <input 
+        type="text" 
+        style="width: 40%;margin: 0 auto;"
+
+        class="form-control"  
+        [(ngModel)]="nuovoMessaggio.nome" 
+        name="nome">
+      </div><br>
+
+      <div class="form-group">
+        <label for="cognome">Inserisci il tuo cognome </label><br>
+        <input   
+        type="text" 
+        style="width: 40%; margin: 0 auto;"
+        class="form-control" 
+        [(ngModel)]="nuovoMessaggio.cognome" 
+        name="cognome">
+      </div><br>
+
+      
+
+      <div class="form-group">
+        <label for="mail">Inserisci la tua mail</label><br>
+        <input  
+        type="text" 
+        style="width: 40%;  margin: 0 auto;  
+        "
+
+        class="form-control"  
+        [(ngModel)]="nuovoMessaggio.mail" 
+        name="mail">
+
+      </div><br>
+
+      <div class="form-group">
+        <label for="messaggio">Inserisci iltuo messaggio</label><br><br>
+        <input style="background-color: rgb(198, 197, 197); height:200px ;
+        width: 70%;
+        margin: 0 auto; " 
+        type="text" 
+        class="form-control"  
+        [(ngModel)]="nuovoMessaggio.messaggio" 
+        name="messaggio">
+
+      </div><br>
+      
+    <br>
+     
+      <br>
+      <button style="background-color:  greenyellow; color:rgb(0, 0, 0);"
+      type="button" 
+      class="add-button" 
+      (click)="sendMessage()">
+        <h2 style="margin-top: 5px;">Invia <br> Messaggio</h2>
+      </button>
+    </form>
+  </div></div> <br> </div>
+   
+   
+    
+     
+     
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <!--Audi Grigia: https://www.autoscout24.it/cms-content-assets/1uvA6BteZY8HPQgaG1ctjp-0f94630b54cf1ffe788124050ecd3e88-audi-a5-sportback-front-1100.jpeg-->
+        

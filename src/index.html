@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width" >
+
+  <meta charset="utf-8">
+  <title>Autosalone</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/img.ico.png">
+  <link rel="stylesheet"  href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="mat-typography" >
+  <app-root></app-root>
+  
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+  const stripe   = Stripe('use your test publishable key');
+  const elements = stripe.elements();
+</script>
+</body>
+</html>

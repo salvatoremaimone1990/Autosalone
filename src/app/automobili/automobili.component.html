@@ -1,0 +1,84 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    
+    <div class="container" >
+     
+             
+      
+      
+
+      
+      <br><br> 
+
+    <ul class="auto" >
+      <div style="text-align: left;">  
+        <br><button style="background-color:rgba(172, 242, 208, 0.942);border: 1px solid;   border-color:black; 
+            border-radius:355px; color: rgb(0, 0, 0);" 
+                    type="button" 
+                    class="delete" 
+                    title="delete auto" 
+                    routerLink="/nuova">
+                 <h3>Aggiungi auto</h3> 
+            </button> <br><br>
+  
+      </div>  
+      <li *ngFor="let auto of lista; 
+                  let indexAuto = index">
+        <br>
+      <a style="text-decoration: none; text-align: left;">
+        <h3>
+          <tbody style="border: 1px solid" >
+                <tr >
+                  <th style="color:rgb(43, 0, 255)">
+                    {{auto.nome}}
+                    {{auto.modello}}
+             &nbsp;({{auto.km}} Km  )</th>
+                </tr>               
+                <tr>
+                  <th style="color:rgb(0, 0, 0)"> 
+                    Colore: {{auto.colore}}
+                  </th>
+                </tr>                
+                <tr>
+                  <th style="color:rgb(0, 0, 0)">
+                    Prezzo: {{auto.prezzo}} € 
+                  </th>
+            </tr>  
+         
+
+            <tr>
+              <th style="color:rgb(0, 0, 0)"><br>
+                <button style="font-size:24px;text-align: center; color: rgb(214, 0, 0);" 
+                        type="button" 
+                        class="delete" 
+                        title="delete auto" 
+                        (click)="removeData(indexAuto)">&nbsp;&nbsp;Cancella&nbsp;&nbsp;<br>
+                <i class="material-icons">delete</i></button> &nbsp;&nbsp;
+                <button style="font-size:24px; text-align: center;" 
+                
+                        type="button" 
+                        class="delete" 
+                        title="delete auto" 
+                        routerLink="/info/{{indexAuto}}">&nbsp; Modifica &nbsp;<br> 
+                          <i class="fa fa-edit"></i>
+                </button>
+                <br><br>
+                <a href="{{auto.imageUrl}}">
+                  <img src={{auto.imageUrl}} 
+                      style=" width:750px;max-width:90%; max-height:100%; " />
+                </a>
+                <br>
+              </th>
+            </tr>
+      </tbody><br><br>
+    </h3></a>
+      </li>
+    </ul><br> </div>
+
+    
+
+
+
+    

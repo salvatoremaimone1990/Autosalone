@@ -1,0 +1,41 @@
+<div class="container" style="font-weight: bold; text-align: center;">
+  <div [hidden]="submitted">
+    <h1>Inserisci automobile</h1>
+    <form (ngSubmit)="onSubmit()" #automobiliForm="ngForm">
+      <div class="form-group">
+        <label for="nome">Inserisci il nome dell'auto</label><br>
+        <input type="text" class="form-control" [(ngModel)]="nuovaAuto.nome" name="nome" required>
+      </div><br>
+
+      <div class="form-group">
+        <label for="modello">Inserisci il modello dell'auto</label><br>
+        <input type="text" class="form-control" [(ngModel)]="nuovaAuto.modello" name="modello" required>
+      </div><br>
+
+      <div class="form-group">
+        <label for="km">Inserisci i chilometri dell'auto</label><br>
+        <input type="number" class="form-control" [(ngModel)]="nuovaAuto.km" name="km" required>
+      </div><br>
+
+      <div class="form-group">
+        <label for="colore">Inserisci il colore dell'auto</label><br>
+        <input type="text" class="form-control" [(ngModel)]="nuovaAuto.colore" name="colore" required>
+      </div><br>
+
+      <div class="form-group">
+        <label for="prezzo">Inserisci il prezzo dell'auto</label><br>
+        <input type="number" class="form-control" [(ngModel)]="nuovaAuto.prezzo" name="prezzo" required>
+      </div><br>
+
+      <div class="form-group">
+        <label for="immagine">Inserisci l'immagine dell'auto</label><br>
+        <input style="background-color: rgb(143, 143, 143); width: 500px; margin: 0 auto;" type="text" class="form-control" [(ngModel)]="nuovaAuto.imageUrl" name="immagine">
+      </div><br>
+
+      <br>
+      <button style="background-color: black; color:white;" type="button" class="add-button" (click)="saveData()">
+        <h2 style="margin-top: 5px;">AGGIUNGI AUTO</h2>
+      </button>
+    </form>
+  </div>
+</div>

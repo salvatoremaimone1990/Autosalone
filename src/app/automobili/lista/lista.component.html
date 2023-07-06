@@ -1,0 +1,14 @@
+<ul class="automobili" style="list-style-type: none; width: 100;">
+    <li *ngFor="let nuovaAuto of lista">
+      <a style="text-decoration: none; text-align: right;" >
+          {{nuovaAuto.nome}} {{nuovaAuto.modello}}&nbsp;|
+          Colore:{{nuovaAuto.colore}}&nbsp;|&nbsp;
+          A partire da: € {{nuovaAuto.prezzo}}
+      </a>
+        &nbsp;
+    <button style="background-color:transparent; color: red;margin-top: -15px;align-items: right;" 
+    type="button" class="delete" title="delete auto" (click)="removeData(key)"><h4>Cancella dalla localStorage</h4></button>
+    
+     <br><br>
+    </li><br>
+  </ul>

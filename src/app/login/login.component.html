@@ -1,0 +1,55 @@
+<div class="contengo" style="height: 100%; display: flex; justify-content: space-between; align-items: center;">
+  <form [formGroup]="loginForm" style="width: 200px; margin-left: 25px; align-self: flex-start;">
+    <h1 class="h3 mb-3 fw-normal" style="text-align: center;">Login</h1>
+    <div>
+      <input type="text" placeholder="Username" formControlName="username" required>
+      <br>
+      <input type="password" placeholder="Password" formControlName="password">
+      <br><br>
+      <button type="submit" (click)="login()" style="background-color: rgb(85, 255, 85); width: 100%;">
+        <strong>ACCEDI</strong>
+      </button>
+    </div>
+  </form>
+
+  <!-- Form per la registrazione -->
+  <form [formGroup]="registrationForm" style="width: 200px; margin-right: 25px; align-self: flex-start;">
+    <h1 class="h3 mb-3 fw-normal" style="text-align: center;">Iscriviti</h1>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingFirstName" formControlName="firstName">
+      <label for="floatingFirstName"><strong style="color: red;">Nome</strong></label>
+      <div *ngIf="firstNameControl?.invalid && firstNameControl?.touched" style="color: red;">
+        <span *ngIf="firstNameControl?.hasError('required')">Il nome è richiesto</span>
+      </div>
+    </div>
+    <br>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingLastName" formControlName="lastName">
+      <label for="floatingLastName"><strong style="color: red;">Cognome</strong></label>
+      <div *ngIf="lastNameControl?.invalid && lastNameControl?.touched" style="color: red;">
+        <span *ngIf="lastNameControl?.hasError('required')">Il cognome è richiesto</span>
+      </div>
+    </div>
+    <br>
+    <div class="form-floating">
+      <input type="string" class="form-control" id="floatingInput" formControlName="username">
+      <label for="floatingInput"><strong style="color: red;">Username</strong></label>
+      <div *ngIf="usernameControl?.invalid && usernameControl?.touched" style="color: red;">
+        <span *ngIf="usernameControl?.hasError('required')">Username è richiesto</span>
+        <span *ngIf="usernameControl?.hasError('username')">Username non è valido</span>
+      </div>
+    </div>
+    <br>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" formControlName="password">
+      <label for="floatingPassword"><strong style="color: red;">Password</strong></label>
+      <div *ngIf="passwordControl?.invalid && passwordControl?.touched" style="color: red;">
+        <span *ngIf="passwordControl?.hasError('minlength')">La Password deve avere almeno 5 caratteri</span>
+      </div>
+    </div>
+    <br>
+
+    <button type="button" (click)="addUser()" style="background-color: rgb(0, 0, 0); color: red; width: 100%;" [disabled]="registrationForm.invalid">
+      <strong>REGISTRATI</strong>
+    </button>
+  </form>

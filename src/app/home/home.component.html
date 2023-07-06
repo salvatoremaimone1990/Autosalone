@@ -1,0 +1,95 @@
+<audio src="../../assets/audio.mp3" controls><!--autoplay--></audio>
+<div class="contengo" 
+     style="margin: 0 auto;">
+ 
+     <div style="text-align: center">
+      <strong>
+      
+        <br><br>
+        <a style="text-decoration: none;" 
+           routerLink="/home">
+          <marquee style="width: 75%;max-width:100%; max-height:100%;">                  
+            
+            <img src="../../assets/pngdiapo/honda.png"
+                 style="width:300px">
+            
+            <img src="../../assets/pngdiapo/Volkswagen.png"
+                 style="width:300px">  
+            
+            <img src="../../assets/pngdiapo/Chevrolet.png"
+                 style="width:300px">
+            
+            <img src="../../assets/pngdiapo/Kia.png"
+                 style="width:300px">
+                  
+          </marquee>  
+        </a>
+      
+      </strong>
+      <br><br><div class="due-colonne">  
+        <div>
+          <img src="../../assets/img.jpg" style="width:75%"><br>
+  
+         
+      </div>  
+    </div></div><br>      
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    
+     
+      
+
+            <br><br> 
+
+    <ul type="none" class="auto" style="width: 100%; margin-left: 130px;" >
+      <div style="text-align: left;">  
+        <br><br>
+  
+      </div>  
+      <li *ngFor="let auto of lista; 
+                  let indexAuto = index">
+        <br>
+      <a style="text-decoration: none; text-align: left;">
+        <h3>
+          <tbody style="border: 1px solid" ><h1>
+            <tr><br></tr>
+                <tr> 
+                  <td >
+                    <a href="{{auto.imageUrl}}">
+                      <img src={{auto.imageUrl}} 
+                        style=" width:750px;max-width:100%; max-height:100%; " />
+                    </a> 
+                  </td>
+                  <td style="padding: 50px;">
+                    <font style="color: rgb(43, 0, 255)">&nbsp;{{auto.nome}}
+                    &nbsp;{{auto.modello}}
+                    <br>&nbsp;( {{auto.km}} Km  )</font> <br> 
+                    &nbsp;Colore: {{auto.colore}} <br> 
+                    &nbsp;Prezzo: {{auto.prezzo}} €<br></td><td></td><td><button  
+                        (click)="acquistAuto()">
+             <strong>
+              COMPRA <br> SUBITO
+     </strong></button></td>
+
+                </tr>
+                
+
+
+                <th><br>
+                    <h4><br><br><hr></h4> 
+
+                  </th></h1>
+         
+
+      </tbody><br>
+    </h3></a>
+      </li>
+    </ul><br> 
+   
+
+    
+     
+     

@@ -1,0 +1,31 @@
+<div *ngIf="autoDaModificare" style="width: 500px; margin: 0 auto;">
+  <h2>{{autoDaModificare.nome}} Dettaglio</h2>
+  <form #automobiliForm="ngForm">
+    <label for="nome">Nome dell'auto</label>
+    <br>
+    <input type="text" style="width: 65%" class="form-control" [(ngModel)]="autoDaModificare.nome" name="nome" required>
+
+    <label for="modello">Modello dell'auto</label>
+    <br>
+    <input type="text" style="width: 65%;" class="form-control" [(ngModel)]="autoDaModificare.modello" name="modello" required>
+
+    <label for="colore">Colore dell'auto</label>
+    <br>
+    <input type="text" style="width: 65%" class="form-control" [(ngModel)]="autoDaModificare.colore" name="colore" required>
+
+    <label for="km">Chilometri dell'auto</label>
+    <br>
+    <input type="number" class="form-control" style="width: 65%" [(ngModel)]="autoDaModificare.km" name="km" required>
+
+    <label for="prezzo">Prezzo dell'auto</label>
+    <br>
+    <input type="number" class="form-control" style="width: 65%" [(ngModel)]="autoDaModificare.prezzo" name="prezzo" required>
+
+    <label for="immagine">Immagine dell'auto</label>
+    <br>
+    <input type="text" style="width: 65%;" class="form-control" [(ngModel)]="autoDaModificare.imageUrl" name="immagine">
+
+    <br>
+    <button type="button" class="add-button" (click)="save()">Salva</button>
+  </form>
+</div>
