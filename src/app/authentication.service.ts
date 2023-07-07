@@ -7,20 +7,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  fakeUsername: string = "username";
-  fakePassword: string = "password";
+  private authToken: string | null = null;
 
   constructor(private router: Router) {}
-
-  encryptCredentials(username: string, password: string): { encryptedUsername: string, encryptedPassword: string } {
-    const encryptedUsername = CryptoJS.AES.encrypt(username, 'secretKey').toString();
-    const encryptedPassword = CryptoJS.AES.encrypt(password, 'secretKey').toString();
-
-    return {
-      encryptedUsername,
-      encryptedPassword
-    };
-  }
 
   login(username: string, password: string): Observable<any> {  
     console.log('Utente connesso:', username);
@@ -36,6 +25,10 @@ export class AuthenticationService {
     return localStorage.getItem("token") || '';
   }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem("token") != null;
+  }
+
   loggedUser(): boolean {
     if (localStorage.getItem("token") != null) {
       this.router.navigate(['automobili']);
@@ -48,7 +41,7 @@ export class AuthenticationService {
 
   utenti: string = 'utenti';
   personale: { utenti: string; firstName: string; lastName: string; username: string; password: string;  }[] = [];
-  nuovoUtente = { utenti: '', firstName: '', lastName: '' , username: '', password: '' };
+  nuovoUtente = { utenti: '', firstName: '', lastName: '', username: '', password: '' };
 
   getUtenti(): { utenti: string;  firstName: string; lastName: string;username: string; password: string }[] {
     const utenti = localStorage.getItem(this.utenti);
@@ -58,9 +51,6 @@ export class AuthenticationService {
   addUser(): void {
     this.personale = this.getUtenti();
     const utenteDaInserire: { utenti: string; firstName: string; lastName: string; username: string; password: string;  } = { ...this.nuovoUtente };
-    const encryptedCredentials = this.encryptCredentials(utenteDaInserire.username, utenteDaInserire.password);
-    utenteDaInserire.username = encryptedCredentials.encryptedUsername;
-    utenteDaInserire.password = encryptedCredentials.encryptedPassword;
 
     this.personale.push(utenteDaInserire);
     localStorage.setItem(this.utenti, JSON.stringify(this.personale));

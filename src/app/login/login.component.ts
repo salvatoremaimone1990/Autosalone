@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as CryptoJS from 'crypto-js';
-
 
 import { AuthenticationService } from '../authentication.service';
 import { User } from './user_interface';
@@ -26,7 +24,6 @@ export class LoginComponent implements OnInit {
       lastName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.minLength(5)]
-      
     });
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -37,7 +34,7 @@ export class LoginComponent implements OnInit {
   get firstNameControl(): FormControl {
     return this.registrationForm.get('firstName') as FormControl;
   }
-  
+
   get lastNameControl(): FormControl {
     return this.registrationForm.get('lastName') as FormControl;
   }
@@ -50,23 +47,18 @@ export class LoginComponent implements OnInit {
     return this.registrationForm.get('password') as FormControl;
   }
 
-  
-
   utenti: string = 'utenti';
   personale: User[] = [];
-  nuovoUtente: User = { utenti: '', firstName: '', lastName: '', username: '', password: ''  };
+  nuovoUtente: User = { utenti: '', firstName: '', lastName: '', username: '', password: '' };
 
-
-  // ...
-  
-  addUser() {
+  addUser(): void {
     this.nuovoUtente.firstName = this.registrationForm.get('firstName')!.value;
     this.nuovoUtente.lastName = this.registrationForm.get('lastName')!.value;
     this.nuovoUtente.username = this.registrationForm.get('username')!.value;
     this.nuovoUtente.password = this.registrationForm.get('password')!.value;
-  
+
     const utenteDaAggiungere: User = { ...this.nuovoUtente };
-  
+
     const personale: User[] = JSON.parse(localStorage.getItem(this.utenti) || '[]');
     for (const utente of personale) {
       if (utente.username === this.nuovoUtente.username) {
@@ -74,56 +66,42 @@ export class LoginComponent implements OnInit {
         return;
       }
     }
-  
-    const encryptedUsername = CryptoJS.AES.encrypt(utenteDaAggiungere.username, 'secretKey').toString();
-    const encryptedPassword = CryptoJS.AES.encrypt(utenteDaAggiungere.password, 'secretKey').toString();
-  
-    utenteDaAggiungere.username = encryptedUsername;
-    utenteDaAggiungere.password = encryptedPassword;
-  
+
     personale.push(utenteDaAggiungere);
     localStorage.setItem(this.utenti, JSON.stringify(personale));
     this.router.navigate(['login']);
   }
-  
-  
-  
+
   login(): void {
     const username = this.loginForm.get('username')!.value;
     const password = this.loginForm.get('password')!.value;
-  
+
     const personale: User[] = JSON.parse(localStorage.getItem(this.utenti) || '[]');
-    const utenteRegistrato = personale.find((utente) => {
-      const decryptedUsername = CryptoJS.AES.decrypt(utente.username, 'secretKey').toString(CryptoJS.enc.Utf8);
-      return decryptedUsername === username;
-    });
-  
+    const utenteRegistrato = personale.find((utente) => utente.username === username);
+
     if (utenteRegistrato) {
-      const decryptedPassword = CryptoJS.AES.decrypt(utenteRegistrato.password, 'secretKey').toString(CryptoJS.enc.Utf8);
-  
-      if (decryptedPassword === password) {
-        const decryptedFirstName = CryptoJS.AES.decrypt(utenteRegistrato.firstName, 'secretKey').toString(CryptoJS.enc.Utf8);
-        localStorage.setItem('firstName', decryptedFirstName);
-  
-        // Esegui la chiamata al servizio di autenticazione per verificare le credenziali
-        this.authenticationService.login(username!, password).subscribe(() => {
+      if (utenteRegistrato.password === password) {
+        const success = this.authenticationService.login(username!, password);
+        if (success) {
+          localStorage.setItem('Utente Connesso', utenteRegistrato.firstName + ' ' + utenteRegistrato.lastName);
           this.router.navigate(['automobili']);
-        });
+        } else {
+          console.log('Credenziali errate');
+        }
       } else {
-        this.router.navigate(['login']);
+        console.log('Password errata');
       }
     } else {
-      this.router.navigate(['login']);
+      console.log('Utente non registrato');
     }
   }
-  
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('Utente Connesso');
     this.router.navigate(['home']);
   }
 
-    getPersonale() {
+  getPersonale(): string | null {
     return localStorage.getItem(this.utenti);
   }
 

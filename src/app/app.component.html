@@ -8,20 +8,9 @@
 
 <body>
     <div style="text-align: center; margin-right: -20;">
-      <div class="nav">
-        <h2>
-          <a routerLink="/home"><i class="fa fa-home" style="color: greenyellow;"></i><span>&nbsp; &nbsp;HOME&nbsp; &nbsp;</span></a>
-
-          <a routerLink="/nuovomessaggio"><i class="fa fa-phone"></i><span>&nbsp; &nbsp;CONTATTACI&nbsp; &nbsp;</span></a>
-
-          <a routerLink="/login" *ngIf="!hasToken()"><i class="fa fa-cogs" style="color: yellow;"></i><span>&nbsp; &nbsp;ADMIN&nbsp; &nbsp;</span></a>
-
-          <a routerLink="/automobili" (click)="logout()" *ngIf="hasToken()"><i class="fa fa-sign-out"></i><span>&nbsp; &nbsp;AUTOMOBILI&nbsp; &nbsp;</span></a>
-
-          <a routerLink="/home" (click)="logout()" *ngIf="hasToken()"><i class="fa fa-sign-out"style="color: red;"></i><span>&nbsp; &nbsp;Disconnetti&nbsp; &nbsp;</span></a>
-
-        </h2>
-      </div>  
+      <app-navbar></app-navbar>
+      
+      
       <font size="20" style="color: rgb(0, 0, 0);"><br><strong>A U T O S A L O N E</strong></font>
     </div>
 
