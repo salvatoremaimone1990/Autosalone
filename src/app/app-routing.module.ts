@@ -16,23 +16,14 @@ const routes: Routes = [
     component: HomeComponent },
   { path: 'info/:indexAuto', 
     component: InfoComponent },
-  { path: 'automobili', 
-    component: AutomobiliComponent,
-    canActivate:[AuthenticationGuard]
-   },
   { path: 'nuovomessaggio', 
     component: NuovomessaggioComponent },
   { path: 'contatto', 
     component: ContattoComponent },
   { path: 'nuova', 
     component: NuovaComponent },
-  {
-    path: 'login',    
-    component:LoginComponent,
-    loadChildren: () => import('./login/login.module').then(
-      m => m.LoginModule
-      )
-  }
+  { path: 'automobili', component: AutomobiliComponent, canActivate: [AuthenticationGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [AuthenticationGuard], data: { allowAnonymous: true } }
 
 ];
 

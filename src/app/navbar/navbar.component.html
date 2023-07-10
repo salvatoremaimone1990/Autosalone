@@ -1,16 +1,17 @@
 <div class="nav">
-    <h2>
-      <a routerLink="/home"><i class="fa fa-home" style="color: greenyellow;"></i><span>&nbsp; &nbsp;HOME&nbsp; &nbsp;</span></a>
-      <a routerLink="/nuovomessaggio"><i class="fa fa-phone"></i><span>&nbsp; &nbsp;CONTATTACI&nbsp; &nbsp;</span></a>
-      
-      <ng-container *ngIf="hasToken(); else notLoggedInSection">
-        <a routerLink="/automobili"><i class="fa fa-car" style="color: blue;"></i><span>&nbsp; &nbsp;AUTOMOBILI&nbsp; &nbsp;</span></a>
-        <a (click)="logout()" class="logout-link"><i class="fa fa-sign-out" style="color: red;"></i><span>&nbsp; &nbsp;DISCONNETTI&nbsp; &nbsp;</span></a>
-      </ng-container>
-      
-      <ng-template #notLoggedInSection>
-        <a routerLink="/login"><i class="fa fa-cogs" style="color: yellow;"></i><span>&nbsp; &nbsp;LOGIN&nbsp; &nbsp;</span></a>
-      </ng-template>
-    </h2>
-  </div>
-  
+  <h2>
+    <a routerLink="/home"><i class="fa fa-home" style="color: greenyellow;"></i><span>&nbsp; &nbsp;HOME&nbsp; &nbsp;</span></a>
+    <a routerLink="/nuovomessaggio"><i class="fa fa-phone"></i><span>&nbsp; &nbsp;CONTATTACI&nbsp; &nbsp;</span></a>
+    
+    <ng-container *ngIf="hasToken(); else notLoggedInSection">
+      <a routerLink="/automobili"><i class="fa fa-car" style="color: blue;"></i><span>&nbsp; &nbsp;AUTOMOBILI&nbsp; &nbsp;</span></a>
+      <a routerLink="/contatto"><i class="fa fa-envelope" style="color: brown;"></i><span>&nbsp; &nbsp;MESSAGGI &nbsp; &nbsp;</span></a>
+
+      <a (click)="logout()" class="logout-link"><i class="fa fa-sign-out" style="color: red;"></i><span>&nbsp; &nbsp;DISCONNETTI&nbsp; &nbsp;</span></a>
+    </ng-container>
+    
+    <ng-template #notLoggedInSection>
+      <a routerLink="/login"><i class="fa fa-cogs" style="color: yellow;"></i><span>&nbsp; &nbsp;LOGIN&nbsp; &nbsp;</span></a>
+    </ng-template>
+  </h2>
+</div>

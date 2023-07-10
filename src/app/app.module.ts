@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms'; // <-- NgModel lives here
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AutomobiliComponent } from './automobili/automobili.component';
@@ -19,24 +19,39 @@ import { LoginRoutingModule } from './login/login-routing.module';
 import { CommonModule } from '@angular/common';
 import { LogoutComponent } from './logout/logout.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginModule } from './login/login.module';
 
-
-
-  @NgModule({
+@NgModule({
   declarations: [
-    AppComponent, ListaComponent, AutomobiliComponent,
-    InfoComponent, HomeComponent, NuovaComponent,
-    ContattoComponent, NuovomessaggioComponent,
+    AppComponent,
+    ListaComponent,
+    AutomobiliComponent,
+    InfoComponent,
+    HomeComponent,
+    NuovaComponent,
+    ContattoComponent,
+    NuovomessaggioComponent,
     AcquistoComponent,
     LogoutComponent,
     NavbarComponent,
   ],
   imports: [
-    BrowserModule, FlexLayoutModule,AppRoutingModule,AppRoutingModule,FormsModule,CommonModule, LoginRoutingModule, 
-    ReactiveFormsModule, BrowserAnimationsModule, 
-    StripeModule.forRoot('pk_test_51NQph3CXoPKOkelYTp3wY0tRVXpCr7BIxCJRMXDSo7AgLjFqrIg3mGkx4nr2yV5N79piV5RsPcCHgo1ayR1GGYpW00LHfPtpDM')
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    LoginRoutingModule,
+    LoginModule,
+    AppRoutingModule,
+    StripeModule.forRoot(
+      'pk_test_51NQph3CXoPKOkelYTp3wY0tRVXpCr7BIxCJRMXDSo7AgLjFqrIg3mGkx4nr2yV5N79piV5RsPcCHgo1ayR1GGYpW00LHfPtpDM'
+      ),
+    ReactiveFormsModule 
   ],
   providers: [AuthenticationInterceptor],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
