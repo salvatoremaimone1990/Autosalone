@@ -82,8 +82,8 @@ export class LoginComponent implements OnInit {
       if (utenteRegistrato.password === password) {
         const success = this.authenticationService.login(username!, password);
         if (success) {
-          localStorage.setItem('Utente Connesso', utenteRegistrato.firstName + ' ' + utenteRegistrato.lastName);
-          this.router.navigate(['automobili']);
+          localStorage.setItem('Connesso', utenteRegistrato.firstName + ' ' + utenteRegistrato.lastName);
+          this.router.navigate(['home']);
         } else {
           console.log('Credenziali errate');
         }
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem('Utente Connesso');
+    localStorage.removeItem('Connesso');
     this.router.navigate(['home']);
   }
 
@@ -105,6 +105,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.personale = JSON.parse(this.getPersonale() || '[]');
+    const utenteConnesso = localStorage.getItem('Connesso');
+
+    if (utenteConnesso) {
+      // Utente già connesso, reindirizza alla pagina delle automobili
+      this.router.navigate(['automobili']);
+    } else {
+      // Utente non connesso, esegui altre inizializzazioni se necessario
+    }
   }
 }

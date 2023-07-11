@@ -8,27 +8,22 @@ import { ContattoComponent } from './contatto/contatto.component';
 import { NuovomessaggioComponent } from './contatto/nuovomessaggio/nuovomessaggio.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationGuard } from './authentication-guard.guard';
+import { BuyCarComponent } from './automobili/buy-car/buy-car.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  
-  { path: 'home', 
-    component: HomeComponent },
-  { path: 'info/:indexAuto', 
-    component: InfoComponent },
-  { path: 'nuovomessaggio', 
-    component: NuovomessaggioComponent },
-  { path: 'contatto', 
-    component: ContattoComponent },
-  { path: 'nuova', 
-    component: NuovaComponent },
-  { path: 'automobili', component: AutomobiliComponent, canActivate: [AuthenticationGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [AuthenticationGuard], data: { allowAnonymous: true } }
-
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, data: { title: 'Home' } },
+  { path: 'buy', component: BuyCarComponent, data: { title: 'Acquista' } },
+  { path: 'automobili', component: AutomobiliComponent, canActivate: [AuthenticationGuard], data: { title: 'Automobili' } },
+  { path: 'automobili/info/:indexAuto', component: InfoComponent, canActivate: [AuthenticationGuard], data: { title: 'Dettagli Auto' } },
+  { path: 'nuova', component: NuovaComponent, canActivate: [AuthenticationGuard], data: { title: 'Nuova Auto' } },
+  { path: 'contatto', component: ContattoComponent, canActivate: [AuthenticationGuard], data: { title: 'Contatto' } },
+  { path: 'messaggio', component: NuovomessaggioComponent, canActivate: [AuthenticationGuard], data: { title: 'Messaggio' } },
+  { path: 'login', component: LoginComponent, canActivate: [AuthenticationGuard], data: { title: 'Login' } },
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

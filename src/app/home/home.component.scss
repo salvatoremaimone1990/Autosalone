@@ -1,8 +1,64 @@
-button{
-  color:rgb(8, 0, 255);
-  margin-left: 200px; 
-  border-color: transparent;   
-  border-radius:35px; 
-  width:55%;
-  height: 10%;
-  background-color: rgb(255, 208, 0);}
+.contengo {
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.auto {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.auto li {
+  margin-bottom: 30px;
+}
+
+.auto a {
+  text-decoration: none;
+  color: #333;
+}
+
+.auto table {
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.auto td {
+  padding: 20px;
+}
+
+.auto img {
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.auto .info {
+  text-align: left;
+}
+
+.auto .info h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #2B00FF;
+}
+
+.auto .info div {
+  margin-bottom: 10px;
+}
+
+.auto button {
+  background-color: #2B00FF;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auto button:hover {
+  background-color: #1C00A3;
+}

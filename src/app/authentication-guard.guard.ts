@@ -13,11 +13,14 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild, CanLo
     private router: Router     
   ) { }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.authenticate();
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const isLoggedIn = !!localStorage.getItem('Connesso');
+    if (isLoggedIn) {
+      return true; // L'utente è connesso, quindi può accedere alla rotta
+    } else {
+      this.router.navigate(['/login']); // L'utente non è connesso, reindirizza alla pagina di login
+      return false;
+    }
   }
   
   canActivateChild(

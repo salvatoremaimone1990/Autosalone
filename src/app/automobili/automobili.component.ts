@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Auto } from '../auto';
 import { StripeScriptTag } from 'stripe-angular';
 import { AuthenticationService } from '../authentication.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-automobili',
@@ -14,10 +16,14 @@ export class AutomobiliComponent {
   lista: Auto[] = [];
   submitted = false;
 
-  constructor(private stripeScriptTag: StripeScriptTag, private authService: AuthenticationService) {
+  constructor(private stripeScriptTag: StripeScriptTag, private router: Router, private authService: AuthenticationService) {
     if (!this.stripeScriptTag.StripeInstance) {
       this.stripeScriptTag.setPublishableKey('');
     }
+  }
+  modificaAuto(auto: Auto) {
+    const indexAuto = this.lista.indexOf(auto);
+    this.router.navigate(['/automobili/info', indexAuto]);
   }
 
   ngOnInit() {

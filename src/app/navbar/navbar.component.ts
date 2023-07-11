@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +6,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
+  connected: boolean = false;
 
-  hasToken(): boolean {
-    return !!localStorage.getItem('Utente Connesso');
+  constructor() {}
+
+  ngOnInit(): void {
+    this.connected = !!localStorage.getItem('Connesso');
   }
 
   logout(): void {
-    localStorage.removeItem('Utente Connesso');
-    this.router.navigate(['home']);
+    localStorage.removeItem('Connesso');
+    this.connected = false;
+  }
+
+  show(): boolean {
+    return !localStorage.getItem('Connesso');
   }
 }

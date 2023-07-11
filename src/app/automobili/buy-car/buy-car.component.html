@@ -1,0 +1,59 @@
+<p>botton works!</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Acquisto con Stripe</title>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <h1>Acquisto con Stripe</h1>
+
+  <form id="payment-form">
+    <div>
+      <label for="card-element">
+        Inserisci i dettagli della carta di credito:
+      </label>
+      <div id="card-element">
+        <!-- Elemento in cui verrà visualizzato l'input della carta -->
+      </div>
+    </div>
+
+    <button type="submit">Paga</button>
+  </form>
+
+  <script>
+    // Inizializzazione di Stripe
+    var stripe = Stripe('pk_test_51NQph3CXoPKOkelYTp3wY0tRVXpCr7BIxCJRMXDSo7AgLjFqrIg3mGkx4nr2yV5N79piV5RsPcCHgo1ayR1GGYpW00LHfPtpDM');
+    var elements = stripe.elements();
+    var cardElement = elements.create('card');
+
+    // Montaggio dell'elemento della carta di credito
+    cardElement.mount('#card-element');
+
+    // Gestione dell'invio del modulo di pagamento
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      stripe.createToken(cardElement).then(function(result) {
+        if (result.error) {
+          // Gestisci gli errori della validazione della carta
+          console.error(result.error);
+        } else {
+          // Invia il token al tuo server
+          var token = result.token.id;
+          // Esegui la logica dell'acquisto o invia il token al server per l'elaborazione
+          effettuaAcquisto(token);
+        }
+      });
+    });
+
+    // Funzione per eseguire l'acquisto o inviare il token al server per l'elaborazione
+    function effettuaAcquisto(token) {
+      // Esegui le operazioni necessarie per l'acquisto, ad esempio invia il token al tuo server
+      console.log('Acquisto effettuato con successo!');
+      console.log('Token: ' + token);
+    }
+  </script>
+</body>
+</html>

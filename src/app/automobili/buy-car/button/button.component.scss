@@ -1,0 +1,30 @@
+.purchase-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .purchase-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .purchase-button:active {
+    animation: purchase-animation 0.3s;
+  }
+  
+  @keyframes purchase-animation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
