@@ -12,28 +12,27 @@
   <br><br>
   <ul class="auto">
     <li *ngFor="let auto of lista; let indexAuto = index">
-        <table style="width: 85%; margin: 0 auto;">
-          <tbody>
-            <tr>
-              <td style="width: 75%;">
-                <a href="{{auto.imageUrl}}" target="_blank">
-                  <img src="{{auto.imageUrl}}" style="height: 1200px;" />
-                </a>
-              </td>
-              <td class="info" style="width: 25%;">
-                <h3>{{auto.nome}} {{auto.modello}}</h3>
-                <div>({{auto.km}} Km)</div>
-                <div>Colore: {{auto.colore}}</div>
-                <div>Prezzo: {{auto.prezzo}} €</div>
-                <div>
-                  <app-button></app-button></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <table style="width: 85%; margin: 0 auto;">
+        <tbody>
+          <tr>
+            <td style="width: 75%;">
+              <a href="{{ auto.imageUrl }}" target="_blank">
+                <img src="{{ auto.imageUrl }}" style="height: 1200px;" />
+              </a>
+            </td>
+            <td class="info" style="width: 25%;">
+              <h3>{{ auto.nome }} {{ auto.modello }}</h3>
+              <div>({{ auto.km }} Km)</div>
+              <div>Colore: {{ auto.colore }}</div>
+              <div>Prezzo: {{ auto.prezzo }} €</div>
+              <div>
+                <button (click)="acquistoStripe(auto)">Acquista</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </li>
   </ul>
-  
-  
-  
-</div><br>
+</div>
+<br>

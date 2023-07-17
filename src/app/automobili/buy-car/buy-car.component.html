@@ -1,29 +1,71 @@
-<p>botton works!</p>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Acquisto con Stripe</title>
   <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    #card-element {
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .pay-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .pay-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <h1>Acquisto con Stripe</h1>
+  <div class="container">
+    <h1>Acquisto con Stripe</h1>
 
-  <form id="payment-form">
-    <div>
-      <label for="card-element">
-        Inserisci i dettagli della carta di credito:
-      </label>
-      <div id="card-element">
-        <!-- Elemento in cui verrà visualizzato l'input della carta -->
+    <form id="payment-form">
+      <div class="form-group">
+        <label for="card-element">Inserisci i dettagli della carta di credito:</label>
+        <div id="card-element">
+          <!-- Elemento in cui verrà visualizzato l'input della carta -->
+        </div>
       </div>
-    </div>
-
-    <button type="submit">Paga</button>
-  </form>
+    
+      <button class="pay-button" onclick="effettuaAcquisto()">Paga</button>
+    </form>
+  </div>
 
   <script>
     // Inizializzazione di Stripe
-    var stripe = Stripe('pk_test_51NQph3CXoPKOkelYTp3wY0tRVXpCr7BIxCJRMXDSo7AgLjFqrIg3mGkx4nr2yV5N79piV5RsPcCHgo1ayR1GGYpW00LHfPtpDM');
+    var stripe = Stripe('pk_test_XXXXXXXXXXXXXXXXXXXXXXXX'); // Sostituisci con la tua chiave pubblica di Stripe
     var elements = stripe.elements();
     var cardElement = elements.create('card');
 
@@ -53,6 +95,9 @@
       // Esegui le operazioni necessarie per l'acquisto, ad esempio invia il token al tuo server
       console.log('Acquisto effettuato con successo!');
       console.log('Token: ' + token);
+
+      // Reindirizza alla dashboard di Stripe per completare il pagamento di test
+      window.location.href = 'https://dashboard.stripe.com/test/payments/' + token;
     }
   </script>
 </body>

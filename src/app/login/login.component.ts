@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { User } from './user_interface';
+import { LocalStorage } from '../local.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private localStorage: LocalStorage
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -83,7 +85,8 @@ export class LoginComponent implements OnInit {
         const success = this.authenticationService.login(username!, password);
         if (success) {
           localStorage.setItem('Connesso', utenteRegistrato.firstName + ' ' + utenteRegistrato.lastName);
-          this.router.navigate(['home']);
+          this.localStorage.setConnected(true);
+          this.router.navigate(['automobili']);
         } else {
           console.log('Credenziali errate');
         }
@@ -97,6 +100,7 @@ export class LoginComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('Connesso');
+    this.localStorage.setConnected(false);
     this.router.navigate(['home']);
   }
 
@@ -108,10 +112,10 @@ export class LoginComponent implements OnInit {
     const utenteConnesso = localStorage.getItem('Connesso');
 
     if (utenteConnesso) {
-      // Utente già connesso, reindirizza alla pagina delle automobili
+      this.localStorage.setConnected(true);
       this.router.navigate(['automobili']);
     } else {
-      // Utente non connesso, esegui altre inizializzazioni se necessario
+      this.localStorage.setConnected(false);
     }
   }
 }

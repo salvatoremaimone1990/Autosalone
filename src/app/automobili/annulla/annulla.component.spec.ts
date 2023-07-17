@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BottonComponent } from './botton.component';
+import { AnnullaComponent } from './annulla.component';
 
-describe('BottonComponent', () => {
-  let component: BottonComponent;
-  let fixture: ComponentFixture<BottonComponent>;
+describe('AnnullaComponent', () => {
+  let component: AnnullaComponent;
+  let fixture: ComponentFixture<AnnullaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BottonComponent ]
+      declarations: [ AnnullaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BottonComponent);
+    fixture = TestBed.createComponent(AnnullaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -20,8 +20,9 @@ import { CommonModule } from '@angular/common';
 import { LogoutComponent } from './logout/logout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginModule } from './login/login.module';
-import { BuyCarComponent } from './automobili/buy-car/buy-car.component';
 import { ButtonComponent } from './automobili/buy-car/button/button.component';
+import { ConfermaAcquistoComponent } from './automobili/buy-car/conferma-acquisto/conferma-acquisto.component';
+import { AnnullaComponent } from './automobili/annulla/annulla.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +37,10 @@ import { ButtonComponent } from './automobili/buy-car/button/button.component';
     AcquistoComponent,
     LogoutComponent,
     NavbarComponent,
-    BuyCarComponent,
-    ButtonComponent
+    ButtonComponent,
+    ConfermaAcquistoComponent,
+    AnnullaComponent
+    
   ],
   imports: [
     BrowserAnimationsModule,
